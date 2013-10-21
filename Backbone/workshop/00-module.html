@@ -1,0 +1,32 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head> 
+<title>Module 00</title>
+    
+    <script src="js/jquery-1.9.1.min.js"></script>
+    
+    <script>
+
+    //jquery object $ = jquery, to make sure $ belongs to jquery
+        var app = (function($){
+
+            //private - can't get to it
+            var foo = "bar";
+
+            // everything here will be public in the console
+            return {
+                name : 'module pattern',
+                set: function(name) {
+                    foo = name;
+                },
+                get: function() {
+                    return foo;
+                }
+            };
+        }(jQuery));
+	
+  	</script>
+
+</head> 
+<body>Move along ... nothing to see here.</body>
+</html>

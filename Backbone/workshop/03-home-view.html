@@ -1,0 +1,61 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head> 
+<title>Home View</title>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />  
+  <script src="js/jquery-1.9.1.min.js"></script>
+  <script src="js/json2-min.js"></script>
+  <script src="js/underscore-1.4.4-min.js"></script>
+  <script src="js/backbone-1.0.0-min.js"></script>
+  
+  <script>
+
+  (function($){
+
+    //create the model
+    var Wine = Backbone.Model.extend({
+      schemaName : "wine"
+    });
+
+    //create the collection
+    var Wines = Backbone.Collection.extend({
+        model: Wine
+    });
+
+    //create the collection object
+    wines = new Wines();
+
+    //create the View
+    HomeView = Backbone.View.extend({
+      
+      initialize : function() {
+        this.render();
+      },
+      render: function() {
+        //el is 'element' - basically an empty box to put stuff in. By default it's a div. $ is a jq shortcut to create the el object.
+        // every time you render, we want to empty the box before we fill the box
+        this.$el.empty();
+        this.$el.append("<h1>Wine Cellar</h1>");
+        this.$el.append("<p>Here it is</p>");
+        return this;
+      }
+    });
+
+  }(jQuery));
+  
+  //jQuery to init the view
+  $(document).ready(function() {
+    view = new HomeView();
+
+    //$('body').append(view.el);
+    // only renders because in the render method, we have 'return this'
+    $('body').append(view.render().el);
+    
+  });
+
+
+  </script>
+
+</head> 
+<body style="padding:20px"></body>
+</html>

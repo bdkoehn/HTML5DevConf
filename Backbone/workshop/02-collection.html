@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>  
+<html lang="en">
+<head> 
+<title>Collection</title>
+    
+  <script src="js/jquery-1.9.1.min.js"></script>
+  <script src="js/json2-min.js"></script>
+  <script src="js/underscore-1.4.4-min.js"></script>
+  <script src="js/backbone-1.0.0-min.js"></script>
+  
+  <script>
+
+  (function($){
+
+    //create the model
+    Wine = Backbone.Model.extend();
+    
+    //creat the collection
+    Wines = Backbone.Collection.extend({
+        Model: Wine
+    });
+
+    //collection
+    wines = new Wines([
+        {winery : "Winery", wine: "black"},
+        {winery : "Winery 2"},
+        {winery : "Winery 3"},
+
+      ])
+
+    //Loop through the collection
+    wines.each( function(model) {
+      console.log(model.toJSON());
+
+    })
+
+  }(jQuery));
+
+	</script>
+
+</head> 
+<body>Collect your things...s</body>
+</html>
