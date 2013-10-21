@@ -63,10 +63,14 @@
 
     var AddView = Backbone.View.extend({
 
+      events: {
+        "click #saveBtn": "save"
+      }
+
       initialize: function() {
         this.template = _.template($('#addTemplate').html());
         this.collection = this.options.collection;
-
+        this.router = this.options.router;
         this.render();
       },
 
@@ -81,7 +85,9 @@
         e.preventDefault();
 
         var wine = new Wine({winery:$('#winery').val() });
-        
+        this.collection.add(wine);
+
+        this.router.navigate('#', {trigger: true});
         
         return this;
       }

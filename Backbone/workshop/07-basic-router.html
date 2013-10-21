@@ -1,7 +1,7 @@
 <!DOCTYPE html>  
 <html lang="en">
 <head> 
-<title>Basic Router</title>
+<title>Basic Router  - Traffic Cops</title>
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />  
   <script src="js/jquery-1.9.1.min.js"></script>
   <script src="js/json2-min.js"></script>
@@ -50,7 +50,7 @@
       },
 
       render: function() {
-        var   self = this;
+        var self = this;
         
         this.$el.empty();
                 
@@ -61,6 +61,8 @@
         return this;
       }
     });
+
+
 
     var AddView = Backbone.View.extend({
 
@@ -75,7 +77,10 @@
       }
     });
 
+   
+//CREATE THE ROUTER
     var AppRouter = Backbone.Router.extend({
+      //create 2 routes. "" is the root 
       routes:{
         "":"home",
         "add":"add"
@@ -93,8 +98,13 @@
       }
     });
 
+    
+    //everything else is private - so no one can hack it
     var initialize = function() {
+      //create the router object
       wineApp = new AppRouter();
+      
+      //to preserve the browser nav
       Backbone.history.start();
     }
 
@@ -102,6 +112,8 @@
 
   }(jQuery));
    
+  
+
   $(document).ready(function() {
     app.initialize();
   });

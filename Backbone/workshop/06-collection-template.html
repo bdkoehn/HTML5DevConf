@@ -30,7 +30,7 @@
 
       render: function() {
         this.$el.empty();
-        this.$el.append("<h1>Wine Cellar</h1>");
+        this.$el.append("<pre id='add'>wines.add({winery : 'Clos Pegase'})</pre><h1>Wine Cellar</h1>");
 
         this.listView = new ListView();
         this.$el.append(this.listView.render().el);
@@ -40,11 +40,13 @@
     });
 
     ListView = Backbone.View.extend({
-      tagName: 'ul',
+      tagName: 'ol',
 
       initialize: function() {
         this.template = _.template($('#listTemplate').html());
         
+        // which collection, which ones - when to redraw the view based on the event, what to do when the thing happens
+        this.listenTo(wines, "all", this.render);
         this.render();
       },
 
@@ -53,6 +55,9 @@
         
         this.$el.empty();
         
+        wines.each(function(model) {
+          self.$el.append(self.template(model.toJSON()));
+        });
                  
         return this;
       }
@@ -63,6 +68,7 @@
   $(document).ready(function() {
     var view = new HomeView();
     $('body').append(view.el);
+    $('#add').click(function(){wines.add({winery : 'Clos Pegase'});});
   });
 
   </script>

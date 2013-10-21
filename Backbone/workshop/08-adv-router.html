@@ -45,6 +45,7 @@
       tagName: 'ul',
 
       initialize: function() {
+        //connect the collection
         this.collection = this.options.collection;
         this.template = _.template($('#listTemplate').html());
         //this.listenTo(this.collection, "all", this.render);
@@ -56,7 +57,7 @@
         
         this.$el.empty();
                 
-        wines.each(function(model) {
+        this.collection.each(function(model) {
           self.$el.append(self.template(model.toJSON()));
         });
                  
@@ -83,21 +84,26 @@
         "add":"add"
       },
 
+      initialize:function(options) {
+        //only create the collections once.
+        this.collection = options.collection;
+      },
 
       home:function () {
-        var view = new HomeView();
+        var view = new HomeView({collection : this.collection});
         $('body').empty();
         $('body').append(view.el);
       },
       add:function () {
-        var view = new AddView();
+        var view = new AddView({collection : this.collection});
         $('body').empty();
         $('body').append(view.el);
       }
     });
 
     var initialize = function() {
-     
+     var wines = new Wines([{winery : "Cakebread"}]);
+
       wineApp = new AppRouter({collection : wines});
       Backbone.history.start();
     }
