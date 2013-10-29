@@ -1,4 +1,4 @@
 StackMob.init({
-    publicKey: "c84904e7-a2c9-4110-8ed3-bffcc06be80a",
+    publicKey: "4ad56880-11c3-4e14-84d5-5086c91fbfaf",
     apiVersion: 0
 });

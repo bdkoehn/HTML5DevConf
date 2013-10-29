@@ -20,10 +20,11 @@
 
     // Updated our Model and Collection 
     var Wine = Backbone.Model.extend({
+      schemaName : "wine"
 
     });
 
-    var Wines = Backbone.Collection.extend({
+    var Wines = StackMob.Collection.extend({
         model: Wine
     });
 
@@ -92,6 +93,13 @@
         e.preventDefault();
         var self = this;
         var wine = new Wine({winery:$('#winery').val() });
+
+        wine.create({
+          success: function(model) {
+          self.collection.add(model);
+          self.router.navigate('#', {trigger: true});
+          }
+        });
         
         // Call create on model and then add to collection
         self.collection.add(wine);
@@ -126,6 +134,7 @@
     var initialize = function() {
       var wines = new Wines();
       // Fetched from StackMob and populated collection
+      wines.fetch({async:true});
 
 
       wineApp = new AppRouter({collection : wines});
